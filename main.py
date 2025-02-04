@@ -1,7 +1,6 @@
 from manim import * # type: ignore
 import os
 
-
 class ImageInterpolationEx(Scene):
     def construct(self):
         img = ImageMobject(np.uint8([[63, 0, 0, 0],
@@ -95,7 +94,7 @@ class LegendarySMPPromo(Scene):
         self.wait(3)
         self.play(Transform(text_vidapp, text_vidapp_approve), Write(text_vidapp_in))
         self.wait(3)
-        self.play(Unwrite(text_vidapp_approve), Unwrite(text_vidapp_in))
+        self.play(FadeOut(text_vidapp), FadeOut(text_vidapp_approve), FadeOut(text_vidapp_in))
         self.play(Write(text_havefun))
+        self.wait(1)
         self.play(Unwrite(text_havefun))
-        
