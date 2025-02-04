@@ -1,4 +1,4 @@
-from manim import *
+from manim import * # type: ignore
 import os
 
 
@@ -34,7 +34,7 @@ class ImageInterpolationEx(Scene):
 
 class AreaScene(Scene):
     def construct(self):
-        inputShape = Text("Lemonfur.", color=RED) # Light Blue Triangle
+        inputShape = Text("Lemonfur", color=RED) # Light Blue Triangle
         outputShape = Text("No Story", color=GREEN)
 
         outputShape.to_edge(DOWN)
@@ -46,7 +46,7 @@ class AreaScene(Scene):
         self.wait(1)
         self.play(
             Transform(
-                inputShape["."][0],
+                inputShape,
                 outputShape
             )
         )
@@ -56,3 +56,46 @@ class AreaScene(Scene):
             FadeOut(outputShape),
             FadeOut(arrow)
         )
+
+class LegendarySMPPromo(Scene):
+    def construct(self):
+        text_legendarySMP = Text("Legendary SMP")
+        text_legendarySMP.to_edge(UP)
+        text_apply = Text("Apply Now")
+        text_apply.to_edge(UP)
+        text_in = Text("You are in!", color=GREEN)
+
+        text_vidapp = Text("Create a\n30sec to 1min\n video application")
+        text_vidapp_approve = Text("And if we approve it")
+        text_vidapp_in = Text("You are in!", color=GREEN)
+        text_vidapp_in.shift(DOWN)
+        text_havefun = Text("Have fun!")
+
+        circle = Circle()
+        check = Text("✓")
+
+        self.play(Write(text_legendarySMP))
+        self.play(Create(circle))
+        self.play(Transform(text_legendarySMP, text_apply))
+        self.play(Circumscribe(text_apply))
+        self.play(Create(check))
+        self.play(FadeOut(text_apply), FadeOut(text_legendarySMP), FadeOut(circle), FadeOut(circle))
+        self.wait(1)
+        self.play(FadeOut(check))
+        
+        self.wait(3)
+
+        self.play(
+            Write(text_in),
+            run_time=4
+        )
+        self.wait(1)
+        self.play(Uncreate(text_in))
+        self.play(Create(text_vidapp))
+        self.wait(3)
+        self.play(Transform(text_vidapp, text_vidapp_approve), Write(text_vidapp_in))
+        self.wait(3)
+        self.play(Unwrite(text_vidapp_approve), Unwrite(text_vidapp_in))
+        self.play(Write(text_havefun))
+        self.play(Unwrite(text_havefun))
+        
